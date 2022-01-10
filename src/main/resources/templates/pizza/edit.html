@@ -3,20 +3,31 @@
 
 <head>
 	<div th:replace="fragments/resources :: headTags"></div>
-	<title>Edit Books</title>
+	<title>New Pizza</title>
 </head>
 
 <body>
-	<nav th:replace="fragments/navbar :: navbar('books')"></nav>
+	
 	<div class="container">
-		<h1>Books</h1>
+		<h1>Pizza</h1>
 		<hr />
+		<form>
 		<id="book-form" th:object="${pizza}" th:action="@{/pizza/create}" method="post">
 
 			<div class="row gy-2">
-				<div class="col-12">
+				<div class="col-6">
 					<label class="form-label" for="nome">Nome</label>
 					<input type="text" class="form-control" id="nome" th:field="*{nome}">
+				</div>
+				
+				<div class="col-6">
+					<label class="form-label" for="prezzo">Prezzo</label>
+					<input type="text" class="form-control" id="prezzo" th:field="*{prezzo}">
+				</div>
+				
+				<div class="col-12">
+					<label class="form-label" for="descrizione">Descrizione</label>
+					<input type="text" class="form-control" id="descrizione" th:field="*{descrizione}">
 				</div>
 
 				
