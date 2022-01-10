@@ -7,11 +7,14 @@
 </head>
 <body>
 <div class="container">
-<h1>Pizza</h1>
+
+<div class="bg-success p-3 ">
+
+<h1 class="text-white text-center">Pizzeria Casa Mia</h1 >
+
+</div>
 <hr/>
-<div class="margin bottom-3">
-	<a class="btn btn-primary" th:href="@{/pizza/create}">New Pizza</a>
-	</div >
+
 
 <table class="table" th:if="${list.size() > 0}">
 		<thead>
@@ -35,7 +38,9 @@
 <div class="alert alert-primary" role="alert" th:unless="${list.size() > 0}">
 	There are no pizza in the menu
 	</div>
-
+<div class="margin bottom-3 ">
+	<a class="btn btn-primary" th:href="@{/pizza/create}">New Pizza</a>
+	</div  >
 </div>
 <div th:replace="fragments/resources :: scripts"></div>
 </body>
