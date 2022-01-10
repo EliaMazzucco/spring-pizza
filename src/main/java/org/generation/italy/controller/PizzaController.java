@@ -30,7 +30,7 @@ public class PizzaController {
 		return "/pizza/edit";
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/docreate")
 	public String doCreate(@ModelAttribute("pizza") Pizza formPizza, Model model) {
 		
 		service.save(formPizza);
