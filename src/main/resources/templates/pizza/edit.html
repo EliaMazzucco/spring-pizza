@@ -13,22 +13,42 @@
 		<hr />
 		
 		<form id="pizza-form" th:object="${pizza}" th:action="${edit} ? @{/pizza/edit/{id}(id=${pizza.id})} :@{/pizza/docreate}" method="post">  
+		
+		<ul>
+			<li th:each="err : ${#fields.allErrors()}" th:text="${err}" class="text-danger"></li>
+		</ul>
 
 			<div class="row gy-2">
 			<div class="col-8">
 				<div class="col-6">
 					<label class="form-label" for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" th:field="*{nome}">
+					<input type="text" class="form-control" id="nome" th:field="*{nome}" th:errorClass="is-invalid">
+					<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
+					<ul>
+						<li th:each="err :${#fields.errors('nome')}" th:text="${err}"></li >
+					</ul>
+					</div >
 				</div>
 				
 				<div class="col-3">
 					<label class="form-label" for="prezzo">Prezzo</label>
 					<input type="text" class="form-control" id="prezzo" th:field="*{prezzo}">
+					<div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
+					<ul>
+					
+					<li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}"></li >
+					</ul>
+					</div >
 				</div>
 				
 				<div class="col-6">
 					<label class="form-label" for="descrizione">Descrizione</label>
-					<input type="text" class="form-control" id="descrizione" th:field="*{descrizione}">
+					<input type="text" class="form-control" id="descrizione" th:field="*{descrizione}" th:errorClass="is-invalid">
+					<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+					<ul>
+					<li th:each="err : $ {#fields.errors('descrizione')}" th:text="${err}"></li >
+					</ul>
+					</div >
 				</div>
 				
 				
@@ -49,11 +69,10 @@
 					<button class="btn btn-primary" type="submit">Save</button>
 				</div>
 			</div>
-			</div>
-
 		</form>
-	</div> 
+	</div>
 	<div th:replace="fragments/resources :: scripts"></div>
 </body>
-
 </html>
+
+	

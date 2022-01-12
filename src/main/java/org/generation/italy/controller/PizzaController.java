@@ -44,40 +44,43 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/docreate")
-	public String doCreate(@ModelAttribute("pizza") Pizza formPizza, Model model) {
-		
+	public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingresult, Model model) {
+		if(bindingresult.hasErrors()) {
+			model.addAttribute("edit", false);
+			model.addAttribute("categoryList", ingredientiService.findAllSortByIngredienti());
+			return "/pizza/edit";
+		}
 		service.save(formPizza);
 		return "redirect:/pizza";		
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String doDelete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("successMessage", "Pizza deleted!");
+	public String doDelete(@PathVariable("id") Integer id) {		
 		service.deleteById(id);
 		return "redirect:/pizza";
 	}
 	
 	@GetMapping("/edit/{id}")
 		public String edit(@PathVariable ("id") Integer id, Model model) {
-		model.addAttribute("edit", true);
-			model.addAttribute("pizza", service.getById(id));
-			model.addAttribute("pizza", new Pizza());
+			model.addAttribute("edit", true);
+			model.addAttribute("pizza", service.getById(id));		
 			model.addAttribute("ingredientiList", ingredientiService.findAllSortByIngredienti());
 			return "/pizza/edit";
 	}
 		
 	@PostMapping("/edit/{id}")
-	public String doUpdate(@ModelAttribute("pizza") Pizza formPizza, BindingResult bindingresult, Model model) {
-		service.update(formPizza);
+	public String doUpdate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingresult, Model model) {
+	
+		if(bindingresult.hasErrors()) {
+			model.addAttribute("edit", true);
+			model.addAttribute("ingredientiList", ingredientiService.findAllSortByIngredienti());
+			return "/pizza/edit";
+		}
+		service.update(formPizza);		
 		return "redirect:/pizza";
 	}
 		
-	
-	
-	
 
 	
 	}
 	
-
-

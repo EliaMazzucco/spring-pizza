@@ -6,9 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,10 +19,11 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@NotNull
+	@NotEmpty(message="Non puoi lasciare il campo vuoto")
 	private String nome;
 	@Lob
 	private String descrizione;
-	@NotNull
+	@NotNull(message="Non puoi lasciare il campo vuoto")
 	private Double prezzo;
 	
 	@ManyToMany
