@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 @RequestMapping("/pizza")
@@ -47,7 +47,7 @@ public class PizzaController {
 	public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingresult, Model model) {
 		if(bindingresult.hasErrors()) {
 			model.addAttribute("edit", false);
-			model.addAttribute("categoryList", ingredientiService.findAllSortByIngredienti());
+			model.addAttribute("ingredientiList", ingredientiService.findAllSortByIngredienti());
 			return "/pizza/edit";
 		}
 		service.save(formPizza);
@@ -76,7 +76,8 @@ public class PizzaController {
 			model.addAttribute("ingredientiList", ingredientiService.findAllSortByIngredienti());
 			return "/pizza/edit";
 		}
-		service.update(formPizza);		
+		service.update(formPizza);
+		
 		return "redirect:/pizza";
 	}
 		

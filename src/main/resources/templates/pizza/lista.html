@@ -4,31 +4,35 @@
 
 <head>
 	<title>Pizza</title>
+	<link rel="stylesheet" th:href="@{/css/application.css}">
 </head>
 <body>
-<div class="container">
 
-<div class="bg-success p-3 ">
 
-<h1 class="text-white text-center">Pizzeria Casa Mia</h1 >
+ <div class="container p-1 overflow-hidden">
+<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
+<h1 class=" text-center">Pizzeria Porti Via</h1 >
 
-</div>
+
+
 <hr/>
 
 
-<table class="table" th:if="${list.size() > 0}">
+
+<table class="table text-center table-borderless" th:if="${list.size() > 0}">
 		<thead>
 			<tr>
-				<th>Nome</th>
-				<th>Prezzo</th>
+				<th class="table-success">Nome</th >
 				<th>Descrizione</th>
+				<th class="table-danger">Prezzo</th >
+			
 			</tr>
 		</thead>
 		<tbody>
 		<tr th:each="item : ${list}">
-		<td th:text="${item.nome}"> </td>
+		<td class="table-success" th:text="${item.nome}"> </td >
 		<td th:text="${item.descrizione}"> </td>
-		<td th:text="${item.prezzo}"> </td>
+		<td class="table-danger" th:text="${item.prezzo}"> </td >
 		<td>
 		<a class="btn btn-primary" th:href="@{|/pizza/edit/${item.id}|}"><i class="fas fa-edit"></i></a>
 		<a class="btn btn-primary" th:href="@{|/pizza/delete/${item.id}|}" onclick="return confirm('Are you sure do you want delete?')"><i class="fas fa-trash-alt"></i></a>
@@ -37,12 +41,26 @@
 		
 		</tbody>
 	</table>
+	
+	
+   
+    
+  </div>
+
+
+
+
+
+
+
+
+
 
 <div class="alert alert-primary" role="alert" th:unless="${list.size() > 0}">
 	There are no pizza in the menu
 	</div>
-<div class="margin bottom-3 ">
-	<a class="btn btn-primary" th:href="@{/pizza/create}">New Pizza</a>
+<div class="text-center ">
+	<a class="btn btn-primary" th:href="@{/pizza/create}"><i class="fas fa-plus"></i> Nuova Pizza</a>
 	</div  >
 </div>
 <div th:replace="fragments/resources :: scripts"></div>
