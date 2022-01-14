@@ -2,6 +2,8 @@ package org.generation.italy.controller;
 
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.generation.italy.model.Pizza;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -29,8 +32,15 @@ public class PizzaController {
 	private IngredientiService ingredientiService;
 	
 	@GetMapping
-	public String list(Model model) {
-		model.addAttribute("list", service.findAllThePizza());
+	public String list(Model model, @RequestParam(name="keyword", required=false) String keyword) {
+		List<Pizza> result;
+		if(keyword != null && !keyword.isEmpty()) {
+			result = service.findByKeywordSortedByRecente(keyword);
+			model.addAttribute("keyword", keyword);
+		}else {
+			result = service.findAllThePizza();
+		}
+		model.addAttribute("list", result);
 		return"/pizza/lista";
 	}
 
@@ -81,6 +91,12 @@ public class PizzaController {
 		return "redirect:/pizza";
 	}
 		
+	@GetMapping("/info/{id}")
+	public String detail(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("pizza", service.getById(id));
+		return "/pizza/info";
+	}
+
 
 	
 	}

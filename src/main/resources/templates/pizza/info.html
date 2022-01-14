@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/resources :: headTags"></div>
+
+<head>
+	<title>Pizza</title>
+	<link rel="stylesheet" th:href="@{/css/application.css}">
+</head>
+<body>
+
+ <div class="container p-1 overflow-hidden">
+<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
+
+<div class="container" th:object="${pizza}">
+			<h1  th:text="*{nome}"></h1 >
+			<div class="row">
+			<div class ="col-8">
+				<dl>
+				<dt>Prezzo</dt>
+				<dd th:text="*{prezzo}"></dd>
+				<dt>Descrizione</dt>
+				<dd th:text="*{descrizione}"></dd>
+				
+			</dl >
+			</div>
+				<div class="col-4">
+					<h3>Ingredienti</h3>
+						<ul>
+							<li th:each="ing : *{ingredienti}" th:text ="${ing.nome}"></li>
+						</ul>
+					</div>
+			</div >
+			<div class="row">
+				<div class="col-12">
+					<a class="btn btn-primary" th:href="@{/}"><i class="fas fa-undo"></i> Indietro</a>
+		
+		</div>
+	<div th:replace="fragments/resources :: scripts"></div>
+</body>
+
+
+</html>

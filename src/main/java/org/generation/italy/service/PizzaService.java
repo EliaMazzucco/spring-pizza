@@ -38,6 +38,10 @@ public class PizzaService {
 	public Pizza getById(Integer id) {
 		return repository.getById(id);
 	}
-}
+	
+	public List<Pizza> findByKeywordSortedByRecente(String keyword){
 		
-
+		return repository.findByNomeContainingIgnoreCaseOrderByNome(keyword);
+		}
+	}
+	
