@@ -26,10 +26,12 @@
 <a class="btn btn-primary " th:href="@{/pizza/create}"><i class="fas fa-plus"></i> Nuova Pizza</a>
 		
 		<form th:action="@{/pizza}" method="get">		
+	
 	<div class="input-group">
-	<input name="keyword" th:value="${keyword}"class="form-control" type="search" placeholder="Search" aria-label="Search"></input>
-	<buttom class="btn btn-primary" type="submit"><i class="fas fa-search"></i></buttom>
+	<input name="keyword" th:value="${keyword}"class="form-control" type="search" placeholder="Search" aria-label="Search">
+	
 	</div>
+	
 	</form  >
 	
 	

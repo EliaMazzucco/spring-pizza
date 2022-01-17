@@ -3,6 +3,7 @@ package org.generation.italy.service;
 import java.util.List;
 
 import org.generation.italy.model.Ingredienti;
+import org.generation.italy.model.Pizza;
 import org.generation.italy.repository.IngredientiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,5 +18,30 @@ public class IngredientiService {
 	public List<Ingredienti> findAllSortByIngredienti(){
 		return repository.findAll(Sort.by("nome"));
 	}
+	
 
-}
+	public Ingredienti save(Ingredienti ingredienti) {		
+		return repository.save(ingredienti);
+
+	}
+	
+	public void deleteById(Integer id) {
+		repository.deleteById(id);
+	}
+	
+	public Ingredienti update(Ingredienti ingredienti) {		
+		return repository.save(ingredienti);
+	}
+	
+	public Ingredienti getById(Integer id) {
+		return repository.getById(id);
+	}
+	
+	public List<Ingredienti> findByKeywordSortedByRecente(String keyword){
+		
+		return repository.findByNomeContainingIgnoreCaseOrderByNome(keyword);
+		}
+	}
+	
+
+
